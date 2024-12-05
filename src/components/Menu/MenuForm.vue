@@ -126,6 +126,7 @@ import { MenuService } from "@/services/Menu/MenuService";
 import Rules from "@/utils/Rules/Rules";
 import { AreaService } from "@/services/Area/AreaService";
 import { onMounted, ref } from "vue";
+import { Area } from "@/classes/Area/Area";
 
 const props = defineProps({
   idNewMenu: {
@@ -184,7 +185,8 @@ async function save() {
         nombre: iconAux.value.name,
       } as any;
     }
-    menu.value.idArea = {id: idAreaAux.value}
+    menu.value.idArea = { id: idAreaAux.value } as Area;
+
     const saveOrUpdate = props.idEditMenu
       ? menuService.update(menu.value)
       : menuService.save(menu.value);
