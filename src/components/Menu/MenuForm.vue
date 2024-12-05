@@ -53,6 +53,18 @@
                 ></v-text-field>
               </v-col>
               <v-col cols="12">
+                <v-autocomplete
+                  v-model="idAreaAux"
+                  item-title="descripcion"
+                  item-value="id"
+                  variant="outlined"
+                  density="compact"
+                  label="Area"
+                  :items="itemsArea"
+                  :rules="[rules.requerido]"
+                ></v-autocomplete>
+              </v-col>
+              <v-col cols="12">
                 <v-file-input
                   v-model="iconAux"
                   label="Icono"
@@ -112,6 +124,7 @@
 import { Menu } from "@/classes/Menu/Menu";
 import { MenuService } from "@/services/Menu/MenuService";
 import Rules from "@/utils/Rules/Rules";
+import { AreaService } from "@/services/Area/AreaService";
 import { onMounted, ref } from "vue";
 
 const props = defineProps({
@@ -129,13 +142,17 @@ const emits = defineEmits(["menuChange"]);
 const rules = new Rules();
 const menuService = new MenuService();
 const menu = ref<Menu>(new Menu());
+const areaService = new AreaService();
+const itemsArea = ref([]);
 
 const menuForm: any = ref(null);
 const iconAux: any = ref();
 const iconB64: any = ref();
+const idAreaAux :any = ref()
 
 onMounted(() => {
   findById();
+  getAreas();
 });
 
 async function findById() {
@@ -147,6 +164,7 @@ async function findById() {
         iconAux.value = {
           name: response.data.archivo.nombre,
         };
+        idAreaAux.value = response.data.area.id
       })
       .catch((e) => {
         console.log("Fatal " + e);
@@ -166,7 +184,7 @@ async function save() {
         nombre: iconAux.value.name,
       } as any;
     }
-    console.log(menu.value)
+    menu.value.idArea = {id: idAreaAux.value}
     const saveOrUpdate = props.idEditMenu
       ? menuService.update(menu.value)
       : menuService.save(menu.value);
@@ -179,6 +197,17 @@ async function save() {
         console.log("Fatal " + e);
       });
   }
+}
+
+function getAreas(){
+  areaService.findAllByEstatus()
+    .then((response) => {
+      console.log(response.data)
+      itemsArea.value = response.data; 
+    })
+    .catch((e) => {
+      console.log("Fatal" + e)
+    })
 }
 
 function reset() {
