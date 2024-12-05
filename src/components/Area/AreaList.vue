@@ -36,7 +36,7 @@
 <script lang="ts" setup>
 import { AreaService } from "@/services/Area/AreaService";
 import { UsuarioAreaService } from "@/services/UsuarioArea/UsuarioAreaService";
-import { storeApp } from "@/store/app";
+//import { storeApp } from "@/store/app";
 import { onMounted, ref } from "vue";
 
 const props = defineProps({
@@ -45,8 +45,9 @@ const props = defineProps({
     required: true,
   },
 });
+const emits = defineEmits(["areaChange"]);
 
-const appStore = storeApp();
+//const appStore = storeApp();
 const areasList: any = ref([]);
 const areasSeleccionadas: any = ref([]);
 const areasService = new AreaService();
@@ -58,11 +59,11 @@ onMounted(() => {
 });
 
 function saveUsuarioAreas() {
-  if (appStore.usuario) {
+  if (props.idUsuario) {
     usuarioAreaService
-      .saveUsuarioAreas(appStore.usuario.id, areasSeleccionadas.value)
-      .then((response) => {
-        console.log(response.data);
+      .saveUsuarioAreas(props.idUsuario, areasSeleccionadas.value)
+      .then(() => {
+        emits("areaChange")
       })
       .catch((e) => {
         console.log("Fatal " + e);

@@ -65,7 +65,7 @@
     <UsuarioRolList :idUsuario="idUsuario"></UsuarioRolList>
   </v-dialog>
   <v-dialog v-model="usuarioAreaDialog" width="500">
-    <AreaList :idUsuario="idUsuario"></AreaList>
+    <AreaList :idUsuario="idUsuario" @areaChange="areaChange"></AreaList>
   </v-dialog>
 </template>
 
@@ -123,6 +123,11 @@ function editarAreas(item: any) {
 
 function usuarioChange() {
   usuariosFormDialog.value = false;
+  getUsuarios();
+}
+
+function areaChange(){
+  usuarioAreaDialog.value = false;
   getUsuarios();
 }
 </script>
