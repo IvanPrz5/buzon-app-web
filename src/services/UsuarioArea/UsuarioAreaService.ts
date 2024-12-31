@@ -10,7 +10,11 @@ export class UsuarioAreaService extends Crud {
     return await axios.get(this.API_URL + "/findAllByUsuarioAndStatus/" + id);
   }
 
-  async saveUsuarioAreas(id: number, item: any){
-    return await axios.post(this.API_URL + "/saveUsuarioAreas/" + id, item)
+  async saveUsuarioAreas(obj: any){
+    return await axios.post(this.API_URL + "/saveUsuarioAreas", obj)
+  }
+
+  quitarArea(item: any){
+    return axios.put(this.API_URL + "/quitarArea", item);
   }
 }

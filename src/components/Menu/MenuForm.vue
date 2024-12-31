@@ -149,7 +149,7 @@ const itemsArea = ref([]);
 const menuForm: any = ref(null);
 const iconAux: any = ref();
 const iconB64: any = ref();
-const idAreaAux :any = ref()
+const idAreaAux: any = ref();
 
 onMounted(() => {
   findById();
@@ -165,7 +165,7 @@ async function findById() {
         iconAux.value = {
           name: response.data.archivo.nombre,
         };
-        idAreaAux.value = response.data.area.id
+        idAreaAux.value = response.data.area.id;
       })
       .catch((e) => {
         console.log("Fatal " + e);
@@ -201,15 +201,16 @@ async function save() {
   }
 }
 
-function getAreas(){
-  areaService.findAllByEstatus()
+function getAreas() {
+  areaService
+    .findAllByEstatus()
     .then((response) => {
-      console.log(response.data)
-      itemsArea.value = response.data; 
+      console.log(response.data);
+      itemsArea.value = response.data;
     })
     .catch((e) => {
-      console.log("Fatal" + e)
-    })
+      console.log("Fatal" + e);
+    });
 }
 
 function reset() {

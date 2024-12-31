@@ -24,10 +24,10 @@
             </v-list-item>
           </v-list>
         </v-col>
-        <v-divider></v-divider>
+        <!-- <v-divider></v-divider>
         <v-col class="d-flex justify-end">
           <v-btn color="success" @click="saveUsuarioAreas">Guardar</v-btn>
-        </v-col>
+        </v-col> -->
       </v-row>
     </v-card-text>
   </v-card>
@@ -37,6 +37,7 @@
 import { AreaService } from "@/services/Area/AreaService";
 import { UsuarioAreaService } from "@/services/UsuarioArea/UsuarioAreaService";
 //import { storeApp } from "@/store/app";
+//import { storeApp } from "@/store/app";
 import { onMounted, ref } from "vue";
 
 const props = defineProps({
@@ -45,7 +46,7 @@ const props = defineProps({
     required: true,
   },
 });
-const emits = defineEmits(["areaChange"]);
+//const emits = defineEmits(["areaChange"]);
 
 //const appStore = storeApp();
 const areasList: any = ref([]);
@@ -58,16 +59,30 @@ onMounted(() => {
   getAreasByUsuario();
 });
 
-function saveUsuarioAreas() {
-  if (props.idUsuario) {
-    usuarioAreaService
-      .saveUsuarioAreas(props.idUsuario, areasSeleccionadas.value)
-      .then(() => {
-        emits("areaChange")
-      })
-      .catch((e) => {
-        console.log("Fatal " + e);
-      });
+function saveUsuarioAreas(item: any) {
+  console.log(item)
+  if(props.idUsuario){
+    return usuarioAreaService.saveUsuarioAreas({
+      idUsuario: {
+        id: props.idUsuario
+      },
+      idArea: {
+        id: item.id
+      }
+    })
+  }
+}
+
+function quitarArea(item: any) {
+  if(props.idUsuario){
+    return usuarioAreaService.quitarArea({
+      idUsuario: {
+        id: props.idUsuario
+      },
+      idArea: {
+        id: item.id
+      }
+    });
   }
 }
 
@@ -82,12 +97,30 @@ const toggleRole = (area: any, isChecked: any) => {
     if (
       !areasSeleccionadas.value.some((selected: any) => selected.id === area.id)
     ) {
-      areasSeleccionadas.value.push(area);
+      const guardar = saveUsuarioAreas(area);
+      guardar
+        ?.then(() => {
+          areasSeleccionadas.value.push(area);
+        })
+        .catch((e) => {
+          console.log("Fatal " + e);
+        });
+      //areasSeleccionadas.value.push(area);
     }
   } else {
-    areasSeleccionadas.value = areasSeleccionadas.value.filter(
+    const deleteArea = quitarArea(area);
+    deleteArea
+      ?.then(() => {
+        areasSeleccionadas.value = areasSeleccionadas.value.filter(
+          (selected: any) => selected.id !== area.id
+        );
+      })
+      .catch((e) => {
+        console.log("Fatal " + e);
+      });
+    /* areasSeleccionadas.value = areasSeleccionadas.value.filter(
       (selected: any) => selected.id !== area.id
-    );
+    ); */
   }
 };
 

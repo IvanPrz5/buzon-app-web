@@ -1,21 +1,34 @@
 <template>
   <v-card>
-    <v-carousel 
-      height="300"
-      hide-delimiter-background
+    <swiper
+      ref="mySwiper"
+      :modules="[Navigation, Pagination]"
+      :slides-per-view="1"
+      :space-between="10"
+      pagination
+      navigation
+      class="mySwiper"
+      @swiper="setSwiperInstance"
     >
+      <swiper-slide v-for="item in desserts.fotosPublicidadList" :key="item.id">
+        <img class="img-carrousel-control" :src="item.content" />
+      </swiper-slide>
+      <!-- Controles del carrusel -->
+      <div class="swiper-pagination"></div>
+    </swiper>
+    <!-- <v-carousel height="300" hide-delimiter-background>
       <v-carousel-item
         v-for="item in desserts.fotosPublicidadList"
         :key="item.id"
-        :src="item.content"
         cover
       >
+      <img :src="item.content">
       </v-carousel-item>
-    </v-carousel>
+    </v-carousel> -->
     <v-card-item>
       <v-card-title>{{ desserts.titulo }}</v-card-title>
       <v-card-subtitle>
-        <span class="me-1">{{ desserts.subTitulos	}}</span>
+        <span class="me-1">{{ desserts.subTitulos }}</span>
         <v-icon color="error" icon="mdi-fire-circle" size="small"></v-icon>
       </v-card-subtitle>
     </v-card-item>
@@ -40,9 +53,15 @@
 </template>
 
 <script lang="ts" setup>
-import { PublicidadService } from "@/services/Publicidad/PublicidadService";
-import { storeApp } from "@/store/app";
 import { onMounted, ref } from "vue";
+import { storeApp } from "@/store/app";
+import { PublicidadService } from "@/services/Publicidad/PublicidadService";
+import { Swiper, SwiperSlide } from "swiper/vue";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import { Swiper as SwiperInstance } from "swiper/types";
+import { Navigation, Pagination } from "swiper/modules";
 
 const props = defineProps({
   idPublicidad: {
@@ -52,14 +71,18 @@ const props = defineProps({
 });
 
 const appStore = storeApp();
-
 const publicidadService = new PublicidadService();
 
 const desserts: any = ref([]);
+const mySwiper = ref<SwiperInstance | null>(null);
 
 onMounted(() => {
   getDetallePublicidaById();
 });
+
+const setSwiperInstance = (swiper: SwiperInstance) => {
+  mySwiper.value = swiper;
+};
 
 function getDetallePublicidaById() {
   if (props.idPublicidad && appStore.usuario) {
@@ -69,8 +92,31 @@ function getDetallePublicidaById() {
         desserts.value = response.data;
       })
       .catch((e) => {
-        console.log("Fatal " + e)
+        console.log("Fatal " + e);
       });
   }
 }
 </script>
+
+<style scooped>
+.mySwiper {
+  height: 100%;
+  width: 100%;
+}
+
+.swiper-slide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #fff;
+}
+
+.img-carrousel-control {
+  max-width: 40%;
+  max-height: 40%;
+}
+
+/* .swiper-pagination-bullet-active {
+  background-color: #fff;
+} */
+</style>

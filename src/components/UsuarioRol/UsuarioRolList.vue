@@ -49,7 +49,7 @@
 <script lang="ts" setup>
 import { RolesService } from "@/services/Roles/RolesService";
 import { UsuarioRolService } from "@/services/UsuarioRol/UsuarioRolService";
-import { storeApp } from "@/store/app";
+//import { storeApp } from "@/store/app";
 import { onMounted, ref } from "vue";
 
 const props = defineProps({
@@ -59,7 +59,7 @@ const props = defineProps({
   },
 });
 
-const appStore = storeApp();
+//const appStore = storeApp();
 const usuarioRolService = new UsuarioRolService();
 const rolService = new RolesService();
 const rolesList: any = ref([]);
@@ -112,7 +112,6 @@ async function getAllRoles() {
     .findAllByEstatus()
     .then((response) => {
       rolesList.value = response.data;
-      console.log(rolesList.value);
     })
     .catch((e) => {
       console.log("Fatal " + e);
@@ -125,7 +124,6 @@ async function getRolesByUsuario() {
       .getRolesByUsuario(props.idUsuario)
       .then((response) => {
         rolesSeleccionados.value = response.data;
-        console.log(rolesSeleccionados.value);
       })
       .catch((e) => {
         console.log("Fatal " + e);
@@ -134,10 +132,10 @@ async function getRolesByUsuario() {
 }
 
 function save(item: any) {
-  if (appStore.usuario) {
+  if (props.idUsuario) {
     return usuarioRolService.save({
       idUsuario: {
-        id: appStore.usuario.id,
+        id: props.idUsuario,
       },
       idRol: {
         id: item.id,
@@ -147,10 +145,10 @@ function save(item: any) {
 }
 
 function quitarRol(item: any) {
-  if (appStore.usuario) {
+  if (props.idUsuario) {
     return usuarioRolService.quitarRol({
       idUsuario: {
-        id: appStore.usuario.id,
+        id: props.idUsuario,
       },
       idRol: {
         id: item.id,
