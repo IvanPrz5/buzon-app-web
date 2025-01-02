@@ -11,5 +11,5 @@ export class Usuario {
     password: string;
     status: boolean;
     idTipoUsuario: TipoUsuario;
-    //roles: Roles[];
+    role: any[];
 }

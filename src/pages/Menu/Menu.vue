@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container v-if="desserts.length > 0">
     <div class="d-flex mb-4">
       <h2 v-if="titleMenu === ''">Menus</h2>
       <h2 v-else>{{ titleMenu }}</h2>
@@ -74,12 +74,14 @@
       ></MenuForm>
     </v-dialog>
   </v-container>
+  <Loader v-else></Loader>
 </template>
 
 <script lang="ts" setup>
 import { onMounted, ref } from "vue";
 import { MenuService } from "@/services/Menu/MenuService";
 import MenuForm from "@/components/Menu/MenuForm.vue";
+import Loader from "@/components/Loader/Loader.vue";
 
 const menuService = new MenuService();
 

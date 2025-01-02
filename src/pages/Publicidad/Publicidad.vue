@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid width="90vw">
+  <v-container v-if="desserts.length > 0" fluid width="90vw">
     <div class="d-flex mb-4">
       <h2>Publicidad</h2>
       <v-spacer></v-spacer>
@@ -22,11 +22,7 @@
             :src="`data:image/png;base64,${item.fotoPublicidad}`"
             cover
           ></v-img> -->
-          <v-img
-            height="250"
-            :src="item.fotoPublicidad"
-            cover
-          ></v-img>
+          <v-img height="250" :src="item.fotoPublicidad" cover></v-img>
           <v-card-item>
             <v-card-title>{{ item.titulo }}</v-card-title>
             <v-card-subtitle>
@@ -80,10 +76,12 @@
       <DetallePublicidad :idPublicidad="idPublicidad"></DetallePublicidad>
     </v-dialog>
   </v-container>
+  <Loader v-else></Loader>
 </template>
 
 <script lang="ts" setup>
 import DetallePublicidad from "@/components/DetallePublicidad/DetallePublicidad.vue";
+import Loader from "@/components/Loader/Loader.vue";
 import PublicidadForm from "@/components/Publicidad/PublicidadForm.vue";
 import { PublicidadService } from "@/services/Publicidad/PublicidadService";
 import { storeApp } from "@/store/app";
@@ -92,7 +90,7 @@ import { onMounted, ref } from "vue";
 const publicidadService = new PublicidadService();
 
 const appStore = storeApp();
-const desserts = ref();
+const desserts: any = ref([]);
 const publicidadFormDialog = ref(false);
 const publicidadDetalleDialog = ref(false);
 const idPublicidad = ref(null);

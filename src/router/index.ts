@@ -6,6 +6,8 @@
 
 // Composables
 import Area from '@/pages/Area/Area.vue';
+import BusquedaCalle from '@/pages/Estacionamiento/BusquedaCalle/BusquedaCalle.vue';
+import GenerarQR from '@/pages/Estacionamiento/GenerarQR/GenerarQR.vue';
 import Estatus from '@/pages/Estatus/Estatus.vue';
 import Login from '@/pages/Login/Login.vue';
 import Menu from '@/pages/Menu/Menu.vue';
@@ -14,6 +16,8 @@ import Roles from '@/pages/Roles/Roles.vue';
 import Solicitud from '@/pages/Solicitud/Solicitud.vue';
 import Usuarios from '@/pages/Usuarios/Usuarios.vue';
 import { createRouter, createWebHistory } from 'vue-router/auto'
+
+const estacionamiento = '/estacionamiento';
 
 const routes = [
   /* {
@@ -65,6 +69,14 @@ const routes = [
         name: "Solicitud",
         component: Solicitud,
       },
+      {
+        path: estacionamiento + '/generar-qr',
+        component: GenerarQR
+      },
+      {
+        path: estacionamiento + '/busqueda',
+        component: BusquedaCalle
+      }
     ],
   },
 ];

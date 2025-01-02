@@ -87,7 +87,7 @@ async function login() {
           "usuario",
           JSON.stringify(response.data.data.usuario)
         );
-        router.push({ path: "/usuarios" });
+        router.push({ path: "/" });
       })
       .catch((err) => {
         console.log(err);

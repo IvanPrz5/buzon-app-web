@@ -6,7 +6,7 @@
         @click.stop="drawer = !drawer"
       ></v-app-bar-nav-icon>
       <!-- <v-toolbar-title>APPLICATION</v-toolbar-title> -->
-      <v-app-bar-title>Application</v-app-bar-title>
+      <v-app-bar-title>Panel General</v-app-bar-title>
       <v-spacer></v-spacer>
       <v-btn
         variant="text"
@@ -19,12 +19,12 @@
       <v-list>
         <v-list-item
           prepend-avatar="/usuario.png"
-          title="Admin"
-          subtitle="admin"
+          :title="appStore.usuario?.nombre"
+          :subtitle="appStore.usuario?.username"
         ></v-list-item>
       </v-list>
       <v-divider></v-divider>
-      <v-list density="compact" nav>
+      <v-list v-if="ROLE_ESTACIONAMIENTO === false" density="compact" nav>
         <v-list-item
           prepend-icon="mdi-account-group"
           title="Usuarios"
@@ -68,6 +68,18 @@
           </v-list-group> -->
         <!-- {{ appStore.usuario.role }} -->
       </v-list>
+      <v-list v-if="ROLE_ESTACIONAMIENTO === true" density="compact" nav>
+        <v-list-item
+          prepend-icon="mdi-qrcode"
+          title="Generar QR"
+          to="/estacionamiento/generar-qr"
+        ></v-list-item>
+        <v-list-item
+          prepend-icon="mdi-magnify"
+          title="Busqueda"
+          to="/estacionamiento/busqueda"
+        ></v-list-item>
+      </v-list>
     </v-navigation-drawer>
     <v-main>
       <router-view :key="$route.fullPath" />
@@ -86,15 +98,17 @@ const router = useRouter();
 const theme = useTheme();
 
 const drawer = ref(true);
+const ROLE_ESTACIONAMIENTO = ref(false);
 
 onBeforeMount(() => {
   const token = localStorage.getItem("token");
   if (token == null) {
     router.push({ path: "/login" });
-  }else{
+  } else {
     const usuario = localStorage.getItem("usuario");
-    if(usuario){
+    if (usuario) {
       appStore.setUsuarioState(JSON.parse(usuario));
+      getRole();
     }
   }
 });
@@ -110,5 +124,16 @@ function darkMode() {
 function cerrarSesion() {
   localStorage.clear();
   router.push({ path: "/login" });
+}
+
+function getRole() {
+  const usuarioRol = appStore.usuario;
+  if (usuarioRol?.role) {
+    for (let i = 0; i < usuarioRol.role.length; i++) {
+      if (usuarioRol.role[i].descripcion === "ROLE_ESTACIONAMIENTO") {
+        ROLE_ESTACIONAMIENTO.value = true;
+      }
+    }
+  }
 }
 </script>
