@@ -114,7 +114,7 @@ async function save() {
 }
 
 function generaQR(item: any){
-  console.log(item);
+  calleService.generateCodigo(item.id);
 }
 
 function openFormCalle() {
