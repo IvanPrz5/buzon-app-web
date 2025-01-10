@@ -6,11 +6,14 @@
 
 // Composables
 import Area from '@/pages/Area/Area.vue';
+import CambiarContraseniaForm from '@/pages/Contraseña/CambiarContraseniaForm.vue';
+import SolicitudChangePasswordForm from '@/pages/Contraseña/SolicitudChangePasswordForm.vue';
 import BusquedaCalle from '@/pages/Estacionamiento/BusquedaCalle/BusquedaCalle.vue';
 import GenerarQR from '@/pages/Estacionamiento/GenerarQR/GenerarQR.vue';
 import Estatus from '@/pages/Estatus/Estatus.vue';
 import Login from '@/pages/Login/Login.vue';
 import Menu from '@/pages/Menu/Menu.vue';
+import NotFound from '@/pages/NotFound/NotFound.vue';
 import Publicidad from '@/pages/Publicidad/Publicidad.vue';
 import Roles from '@/pages/Roles/Roles.vue';
 import Solicitud from '@/pages/Solicitud/Solicitud.vue';
@@ -28,6 +31,17 @@ const routes = [
     path: "/login",
     name: "Login",
     component: Login,
+  },
+  {
+    path: "/cambiar-contrasenia/:idUsuario/:uuid/:id",
+    name: "CambiarContrasenia",
+    props: true,
+    component: CambiarContraseniaForm,
+  },
+  {
+    path: "/solicitud-cambio-password",
+    name: "SolicitudCambioPassword",
+    component: SolicitudChangePasswordForm,
   },
   {
     path: "/",
@@ -78,6 +92,10 @@ const routes = [
         component: BusquedaCalle
       }
     ],
+  },
+  {
+    path: "/notFound",
+    component: NotFound,
   },
 ];
 

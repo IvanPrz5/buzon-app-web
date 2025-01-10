@@ -19,11 +19,14 @@ declare module 'vue-router/auto-routes' {
    */
   export interface RouteNamedMap {
     '/Area/Area': RouteRecordInfo<'/Area/Area', '/Area/Area', Record<never, never>, Record<never, never>>,
+    '/Contraseña/CambiarContraseniaForm': RouteRecordInfo<'/Contraseña/CambiarContraseniaForm', '/Contraseña/CambiarContraseniaForm', Record<never, never>, Record<never, never>>,
+    '/Contraseña/SolicitudChangePasswordForm': RouteRecordInfo<'/Contraseña/SolicitudChangePasswordForm', '/Contraseña/SolicitudChangePasswordForm', Record<never, never>, Record<never, never>>,
     '/Estacionamiento/BusquedaCalle/BusquedaCalle': RouteRecordInfo<'/Estacionamiento/BusquedaCalle/BusquedaCalle', '/Estacionamiento/BusquedaCalle/BusquedaCalle', Record<never, never>, Record<never, never>>,
     '/Estacionamiento/GenerarQR/GenerarQR': RouteRecordInfo<'/Estacionamiento/GenerarQR/GenerarQR', '/Estacionamiento/GenerarQR/GenerarQR', Record<never, never>, Record<never, never>>,
     '/Estatus/Estatus': RouteRecordInfo<'/Estatus/Estatus', '/Estatus/Estatus', Record<never, never>, Record<never, never>>,
     '/Login/Login': RouteRecordInfo<'/Login/Login', '/Login/Login', Record<never, never>, Record<never, never>>,
     '/Menu/Menu': RouteRecordInfo<'/Menu/Menu', '/Menu/Menu', Record<never, never>, Record<never, never>>,
+    '/NotFound/NotFound': RouteRecordInfo<'/NotFound/NotFound', '/NotFound/NotFound', Record<never, never>, Record<never, never>>,
     '/Publicidad/Publicidad': RouteRecordInfo<'/Publicidad/Publicidad', '/Publicidad/Publicidad', Record<never, never>, Record<never, never>>,
     '/Roles/Roles': RouteRecordInfo<'/Roles/Roles', '/Roles/Roles', Record<never, never>, Record<never, never>>,
     '/Solicitud/Solicitud': RouteRecordInfo<'/Solicitud/Solicitud', '/Solicitud/Solicitud', Record<never, never>, Record<never, never>>,

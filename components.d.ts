@@ -12,7 +12,6 @@ declare module 'vue' {
     DetallePublicidad: typeof import('./src/components/DetallePublicidad/DetallePublicidad.vue')['default']
     DetalleSolicitud: typeof import('./src/components/Solicitud/DetalleSolicitud.vue')['default']
     EstatusForm: typeof import('./src/components/Estatus/EstatusForm.vue')['default']
-    GenerarQr: typeof import('./src/components/Estacionamiento/GenerarQR/GenerarQr.vue')['default']
     Loader: typeof import('./src/components/Loader/Loader.vue')['default']
     MenuForm: typeof import('./src/components/Menu/MenuForm.vue')['default']
     PublicidadForm: typeof import('./src/components/Publicidad/PublicidadForm.vue')['default']

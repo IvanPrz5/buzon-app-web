@@ -1,0 +1,17 @@
+.container-contrasenia {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.title-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.control-candado {
+    width: 180px;
+}

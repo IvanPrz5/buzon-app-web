@@ -13,13 +13,8 @@
           <v-card-text>
             <v-data-table :items="desserts" :headers="headers">
               <template v-slot:[`item.actions`]="{ item }">
-                <v-btn
-                  color="warning"
-                  @click="generaQR(item)"
-                >
-                  <v-icon size="x-large" color="black">
-                    mdi-qrcode
-                  </v-icon>
+                <v-btn color="warning" @click="generaQR(item)">
+                  <v-icon size="x-large" color="black"> mdi-qrcode </v-icon>
                 </v-btn>
               </template>
             </v-data-table>
@@ -27,7 +22,6 @@
         </v-card>
       </v-col>
     </v-row>
-
     <v-dialog v-model="dialogFormCalle" width="600">
       <v-card>
         <v-card-title> Formulario de Calle </v-card-title>
@@ -74,9 +68,9 @@ const calleForm: any = ref(null);
 const calle = ref<Calle>(new Calle());
 
 const headers = ref([
-  { title: 'ID', key: 'id' },
-  { title: 'Calle', key: 'calle' },
-  { title: 'Opciones', key: "actions" }
+  { title: "ID", key: "id" },
+  { title: "Calle", key: "calle" },
+  { title: "Opciones", key: "actions" },
 ]);
 const desserts: any = ref([]);
 const dialogFormCalle = ref(false);
@@ -113,8 +107,10 @@ async function save() {
   }
 }
 
-function generaQR(item: any){
-  console.log(item);
+function generaQR(item: any) {
+  calleService.generateCodigo(item.id).catch((e) => {
+    console.log("Fatal " + e);
+  });
 }
 
 function openFormCalle() {
