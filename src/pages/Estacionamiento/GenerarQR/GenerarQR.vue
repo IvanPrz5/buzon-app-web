@@ -107,6 +107,8 @@ async function save() {
   }
 }
 
+function generaQR(item: any){
+  calleService.generateCodigo(item.id);
 function generaQR(item: any) {
   calleService.generateCodigo(item.id).catch((e) => {
     console.log("Fatal " + e);
