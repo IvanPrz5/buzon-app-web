@@ -10,7 +10,7 @@
       <v-card-text>
         <v-form ref="solicitudChangeForm" fast-fail @submit.prevent>
           <v-row no-gutters>
-            <v-col v-if="showAlert === true" cols="12">
+            <v-col v-if="showAlert == true" cols="12">
               <v-alert
                 class="mb-5"
                 :text="msg"

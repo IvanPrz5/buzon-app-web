@@ -1,5 +1,5 @@
 <template>
-  <v-container v-if="desserts.length > 0">
+  <v-container v-if="showLoader == false">
     <div class="d-flex mb-4">
       <h2 v-if="titleMenu === ''">Menus</h2>
       <h2 v-else>{{ titleMenu }}</h2>
@@ -90,6 +90,7 @@ const desserts: any = ref([]);
 const idNewMenu = ref<number | null>(null);
 const idEditMenu = ref<number | null>(null);
 const titleMenu = ref("");
+const showLoader = ref(false);
 
 onMounted(() => {
   if (!idNewMenu.value) {
@@ -98,13 +99,16 @@ onMounted(() => {
 });
 
 async function findAllByStatus() {
+  showLoader.value = true;
   menuService
     .findAllByEstatus()
     .then((response) => {
       desserts.value = response.data;
+      showLoader.value = false;
     })
     .catch((e) => {
       console.log("Fatal " + e);
+      showLoader.value = false;
     });
 }
 
@@ -145,13 +149,7 @@ function agregar() {
 
 <style>
 .gif-container {
-  background-color: transparent !important;
   display: flex;
   justify-content: center;
-}
-
-.gif-container img {
-  mix-blend-mode: multiply;
-  display: block;
 }
 </style>

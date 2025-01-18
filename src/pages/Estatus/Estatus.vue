@@ -1,5 +1,5 @@
 <template>
-  <v-container width="70vw">
+  <v-container v-if="!showLoader" width="70vw">
     <div class="d-flex mb-4">
       <h2>Estatus</h2>
       <v-spacer></v-spacer>
@@ -35,6 +35,7 @@
       ></EstatusForm>
     </v-dialog>
   </v-container>
+  <Loader v-else></Loader>
 </template>
 
 <script lang="ts" setup>
@@ -52,19 +53,24 @@ const headers = ref([
 ]);
 const estatusFormDialog = ref(false);
 const idEstatus = ref<number | null>(null);
+const showLoader = ref(false);
 
 onMounted(() => {
   findAllByStatus();
+  //agregar
 });
 
 async function findAllByStatus() {
+  showLoader.value = true;
   estatusService
     .findAllByEstatus()
     .then((response) => {
       desserts.value = response.data;
+      showLoader.value = false;
     })
     .catch((e) => {
       console.log("Fatal " + e);
+      showLoader.value = false;
     });
 }
 

@@ -38,11 +38,11 @@ const routes = [
     props: true,
     component: CambiarContraseniaForm,
   },
-  {
+  /* {
     path: "/solicitud-cambio-password",
     name: "SolicitudCambioPassword",
     component: SolicitudChangePasswordForm,
-  },
+  }, */
   {
     path: "/",
     component: () => import("@/layout/Layout.vue"),

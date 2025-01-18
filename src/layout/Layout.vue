@@ -24,7 +24,7 @@
         ></v-list-item>
       </v-list>
       <v-divider></v-divider>
-      <v-list v-if="ROLE_ESTACIONAMIENTO === false" density="compact" nav>
+      <v-list density="compact" nav>
         <v-list-item
           prepend-icon="mdi-account-group"
           title="Usuarios"
@@ -41,14 +41,14 @@
           to="/areas"
         ></v-list-item>
         <v-list-item
-          prepend-icon="mdi-menu"
-          title="Menu"
-          to="/menus"
-        ></v-list-item>
-        <v-list-item
           prepend-icon="mdi-state-machine"
           title="Estatus"
           to="/estatus"
+        ></v-list-item>
+        <v-list-item
+          prepend-icon="mdi-menu"
+          title="Menu"
+          to="/menus"
         ></v-list-item>
         <v-list-item
           prepend-icon="mdi-bullhorn"

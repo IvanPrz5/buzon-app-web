@@ -138,14 +138,16 @@ const solicitudHistoricoListDialog = ref(false);
 
 onMounted(() => {
   findAllAreaByUsuario();
-  findAllEstatus();
+  //findAllEstatus();
 });
 
 async function findAllAreaByUsuario() {
   if (appStore.usuario) {
+    //showLoader.value = true;
     usuarioAreaService
       .findAllByUsuarioAndStatus(appStore.usuario.id)
       .then((response) => {
+        console.log(response.data)
         itemsArea.value = response.data;
         idAreaAux.value = response.data[0].id;
         findAllEstatus();
