@@ -20,7 +20,7 @@
     "pinia": "^2.2.6",
     "primevue": "^4.2.2",
     "roboto-fontface": "*",
-    "swiper": "^11.1.15",
+    "swiper": "10.3.1",
     "vue": "^3.4.31",
     "vuetify": "^3.6.14"
   },

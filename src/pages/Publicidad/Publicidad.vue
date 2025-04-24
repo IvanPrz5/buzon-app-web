@@ -96,13 +96,13 @@ const publicidadDetalleDialog = ref(false);
 const idPublicidad = ref(null);
 
 onMounted(() => {
-  findAllByStatusAndIdUsuario();
+  findAllByStatus();
 });
 
-async function findAllByStatusAndIdUsuario() {
+async function findAllByStatus() {
   if (appStore.usuario) {
     publicidadService
-      .findAllByStatusAndIdUsuario(appStore.usuario.id)
+      .findAllByStatus()
       .then((response) => {
         desserts.value = response.data;
       })
@@ -119,7 +119,7 @@ function openPublicidadDetalleDialog(item: any) {
 
 function publicidadChange() {
   publicidadFormDialog.value = false;
-  findAllByStatusAndIdUsuario();
+  findAllByStatus();
 }
 
 function agregar() {

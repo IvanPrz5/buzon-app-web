@@ -9,4 +9,13 @@ export class SolicitudService extends Crud {
     async findAllByIdUsuarioAndIdEstatusAndIdAreaAndStatus(idUsuario: number, idEstatus: number, idArea: number){
         return await axios.get(this.API_URL + "/findAllByIdUsuarioAndIdAreaAndStatus/" + idUsuario + "/" + idEstatus + "/" + idArea);
     }
+
+    async findAllByStatusOrderByIdDesc(){
+        return await axios.get(this.API_URL + "/findAllByStatusOrderByIdDesc");
+    }
+    
+    async findAllByIdEstatusAndIdAreaAndStatusOrderByIdDesc(idEstatus: number, idArea: number){
+        return await axios.get(this.API_URL + "/findAllByIdEstatusAndIdAreaAndStatusOrderByIdDesc/" + idEstatus + "/" + idArea);
+    }
+
 }

@@ -1,10 +1,6 @@
 <template>
   <v-container>
-    <v-img
-      class="mx-auto my-10"
-      max-width="250"
-      src="https://cdn.vuetifyjs.com/docs/images/logos/vuetify-logo-v3-slim-text-light.svg"
-    ></v-img>
+    <v-img class="mx-auto my-10" max-width="250" src="/conejo.png"></v-img>
     <v-card
       class="mx-auto pa-12 pb-8"
       elevation="0"
@@ -56,6 +52,9 @@
         </v-card-text> -->
     </v-card>
   </v-container>
+  <v-snackbar v-model="snack" :timeout="2000" color="error">
+    El usuario no esta autorizado, o las credenciales son incorrectas.
+  </v-snackbar>
 </template>
 
 <script lang="ts" setup>
@@ -74,6 +73,7 @@ const usuario = ref<Usuario>(new Usuario());
 const loginForm: any = ref(null);
 const appStore = storeApp();
 const visible = ref(false);
+const snack: any = ref(false);
 
 async function login() {
   const { valid } = await loginForm.value.validate();
@@ -81,15 +81,24 @@ async function login() {
     authService
       .login(usuario.value)
       .then((response) => {
-        localStorage.setItem("token", response.data.data.token);
-        appStore.setUsuarioState(response.data.data.usuario);
-        localStorage.setItem(
-          "usuario",
-          JSON.stringify(response.data.data.usuario)
-        );
-        router.push({ path: "/" });
+        console.log(response.data)
+
+        if (response.data) {
+          if (response.data.data.token) {
+            localStorage.setItem("token", response.data.data.token);
+            appStore.setUsuarioState(response.data.data.usuario);
+            localStorage.setItem(
+              "usuario",
+              JSON.stringify(response.data.data.usuario)
+            );
+            router.push({ path: "/" });
+          } else {
+            snack.value = true;
+          }
+        }
       })
       .catch((err) => {
+        snack.value = true;
         console.log(err);
       });
   }

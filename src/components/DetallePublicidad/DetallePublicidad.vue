@@ -1,6 +1,6 @@
 <template>
   <v-card>
-    <swiper
+    <!-- <swiper
       ref="mySwiper"
       :modules="[Navigation, Pagination]"
       :slides-per-view="1"
@@ -13,10 +13,9 @@
       <swiper-slide v-for="item in desserts.fotosPublicidadList" :key="item.id">
         <img class="img-carrousel-control" :src="item.content" />
       </swiper-slide>
-      <!-- Controles del carrusel -->
       <div class="swiper-pagination"></div>
-    </swiper>
-    <!-- <v-carousel height="300" hide-delimiter-background>
+    </swiper> -->
+    <v-carousel height="300" hide-delimiter-background>
       <v-carousel-item
         v-for="item in desserts.fotosPublicidadList"
         :key="item.id"
@@ -24,7 +23,7 @@
       >
       <img :src="item.content">
       </v-carousel-item>
-    </v-carousel> -->
+    </v-carousel>
     <v-card-item>
       <v-card-title>{{ desserts.titulo }}</v-card-title>
       <v-card-subtitle>
@@ -56,13 +55,13 @@
 import { onMounted, ref } from "vue";
 import { storeApp } from "@/store/app";
 import { PublicidadService } from "@/services/Publicidad/PublicidadService";
-import { Swiper, SwiperSlide } from "swiper/vue";
+/* import { Swiper, SwiperSlide } from "swiper/vue";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { Swiper as SwiperInstance } from "swiper/types";
 import { Navigation, Pagination } from "swiper/modules";
-
+ */
 const props = defineProps({
   idPublicidad: {
     type: [Number, null],
@@ -74,15 +73,15 @@ const appStore = storeApp();
 const publicidadService = new PublicidadService();
 
 const desserts: any = ref([]);
-const mySwiper = ref<SwiperInstance | null>(null);
+//const mySwiper = ref<SwiperInstance | null>(null);
 
 onMounted(() => {
   getDetallePublicidaById();
 });
 
-const setSwiperInstance = (swiper: SwiperInstance) => {
+/* const setSwiperInstance = (swiper: SwiperInstance) => {
   mySwiper.value = swiper;
-};
+}; */
 
 function getDetallePublicidaById() {
   if (props.idPublicidad && appStore.usuario) {

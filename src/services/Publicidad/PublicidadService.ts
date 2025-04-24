@@ -12,4 +12,8 @@ export class PublicidadService extends Crud {
   async findByIdAndEstatusAndIdUsuario(idPublicidad: number | string, idUsuario: number){
     return await axios.get(this.API_URL + "/findByIdAndStatusAndIdUsuario/" + idPublicidad + "/" + idUsuario)
   }
+
+  async findAllByStatus(){
+    return await axios.get(this.API_URL + "/findAllByStatus");
+  }
 }

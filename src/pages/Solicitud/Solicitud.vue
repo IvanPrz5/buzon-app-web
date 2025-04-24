@@ -170,7 +170,7 @@ function search(){
 async function findAllByIdUsuarioAndIdEstatusAndIdArea(idArea: any, idEstatus: any) {
   if (appStore.usuario) {
     solicitudService
-      .findAllByIdUsuarioAndIdEstatusAndIdAreaAndStatus(appStore.usuario.id, idEstatus, idArea)
+      .findAllByIdEstatusAndIdAreaAndStatusOrderByIdDesc(idEstatus, idArea)
       .then((response) => {
         desserts.value = response.data;
       })
