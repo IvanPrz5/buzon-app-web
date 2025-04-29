@@ -8,7 +8,7 @@ export class AuthService extends Crud {
   }
 
   async login(credentials: Usuario) {
-    return await axios.post(this.API_URL + "/login", credentials);
+    return await axios.post(this.API_URL + "/loginUserAdmin", credentials);
   }
 
   async register(credentials: Usuario) {

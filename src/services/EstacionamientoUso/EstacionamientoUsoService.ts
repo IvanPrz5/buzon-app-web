@@ -7,6 +7,9 @@ export class EstacionamientoUsoService extends Crud {
   }
 
   async busqueda(placas: string) {
-    return await axios.get(this.API_URL + '/busqueda/' + placas);
+    const obj = {
+      placas: placas,
+    };
+    return await axios.post(this.API_URL + "/busquedaByPlacas", obj);
   }
 }
