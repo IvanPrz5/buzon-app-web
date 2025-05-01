@@ -115,8 +115,8 @@
                   <v-card
                     v-for="(item, i) in arrayFile"
                     :key="i"
-                    :prepend-avatar="`data:image/png;base64,${item.content}`"
-                    :subtitle="`Image ${i + 1}`"
+                    :prepend-avatar="`${item.content}`"
+                    :subtitle="item.nombre"
                     class="card-img mt-2"
                     variant="outlined"
                   >
@@ -140,6 +140,7 @@
   </v-card>
   <v-dialog v-model="tipoPublicidadFormDialog" width="500">
     <TipoPublicidadForm
+      :id-tipo-publicidad="null"
       @tipoPublicidadChange="tipoPublicidadChange"
     ></TipoPublicidadForm>
   </v-dialog>
@@ -213,7 +214,7 @@ async function save() {
 
     const saveOrUpdate = props.idPublicidad
       ? publicidadService.update(publicidad.value)
-      : publicidadService.save(publicidad.value)
+      : publicidadService.save(publicidad.value);
 
     saveOrUpdate
       .then(() => {
@@ -232,11 +233,11 @@ function onChangeFile(event: any) {
   if (input.files) {
     while (count--) {
       const reader = new FileReader();
-      //const file = input.files[index];
+      const file = input.files[index];
       reader.onload = (e) => {
         arrayFile.value.push({
           content: e.target?.result as string,
-          //name: file.name,
+          nombre: file.name,
         });
       };
       reader.readAsDataURL(input.files[index]);

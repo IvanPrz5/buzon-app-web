@@ -41,6 +41,11 @@
           to="/areas"
         ></v-list-item>
         <v-list-item
+          prepend-icon="mdi-bullhorn-variant"
+          title="Tipo Publicidad"
+          to="/tipoPublicidad"
+        ></v-list-item>
+        <v-list-item
           prepend-icon="mdi-state-machine"
           title="Estatus"
           to="/estatus"

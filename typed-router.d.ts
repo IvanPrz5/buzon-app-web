@@ -30,6 +30,7 @@ declare module 'vue-router/auto-routes' {
     '/Publicidad/Publicidad': RouteRecordInfo<'/Publicidad/Publicidad', '/Publicidad/Publicidad', Record<never, never>, Record<never, never>>,
     '/Roles/Roles': RouteRecordInfo<'/Roles/Roles', '/Roles/Roles', Record<never, never>, Record<never, never>>,
     '/Solicitud/Solicitud': RouteRecordInfo<'/Solicitud/Solicitud', '/Solicitud/Solicitud', Record<never, never>, Record<never, never>>,
+    '/TipoPublicidad/TipoPublicidad': RouteRecordInfo<'/TipoPublicidad/TipoPublicidad', '/TipoPublicidad/TipoPublicidad', Record<never, never>, Record<never, never>>,
     '/Usuarios/Usuarios': RouteRecordInfo<'/Usuarios/Usuarios', '/Usuarios/Usuarios', Record<never, never>, Record<never, never>>,
   }
 }

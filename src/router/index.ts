@@ -5,22 +5,22 @@
  */
 
 // Composables
-import Area from '@/pages/Area/Area.vue';
-import CambiarContraseniaForm from '@/pages/Contraseña/CambiarContraseniaForm.vue';
-import SolicitudChangePasswordForm from '@/pages/Contraseña/SolicitudChangePasswordForm.vue';
-import BusquedaCalle from '@/pages/Estacionamiento/BusquedaCalle/BusquedaCalle.vue';
-import GenerarQR from '@/pages/Estacionamiento/GenerarQR/GenerarQR.vue';
-import Estatus from '@/pages/Estatus/Estatus.vue';
-import Login from '@/pages/Login/Login.vue';
-import Menu from '@/pages/Menu/Menu.vue';
-import NotFound from '@/pages/NotFound/NotFound.vue';
-import Publicidad from '@/pages/Publicidad/Publicidad.vue';
-import Roles from '@/pages/Roles/Roles.vue';
-import Solicitud from '@/pages/Solicitud/Solicitud.vue';
-import Usuarios from '@/pages/Usuarios/Usuarios.vue';
-import { createRouter, createWebHistory } from 'vue-router/auto'
+import Area from "@/pages/Area/Area.vue";
+import CambiarContraseniaForm from "@/pages/Contraseña/CambiarContraseniaForm.vue";
+import BusquedaCalle from "@/pages/Estacionamiento/BusquedaCalle/BusquedaCalle.vue";
+import GenerarQR from "@/pages/Estacionamiento/GenerarQR/GenerarQR.vue";
+import Estatus from "@/pages/Estatus/Estatus.vue";
+import Login from "@/pages/Login/Login.vue";
+import Menu from "@/pages/Menu/Menu.vue";
+import NotFound from "@/pages/NotFound/NotFound.vue";
+import Publicidad from "@/pages/Publicidad/Publicidad.vue";
+import Roles from "@/pages/Roles/Roles.vue";
+import Solicitud from "@/pages/Solicitud/Solicitud.vue";
+import TipoPublicidad from "@/pages/TipoPublicidad/TipoPublicidad.vue";
+import Usuarios from "@/pages/Usuarios/Usuarios.vue";
+import { createRouter, createWebHistory } from "vue-router/auto";
 
-const estacionamiento = '/estacionamiento';
+const estacionamiento = "/estacionamiento";
 
 const routes = [
   /* {
@@ -59,6 +59,11 @@ const routes = [
         component: Area,
       },
       {
+        path: "/tipoPublicidad",
+        name: "TipoPublicidad",
+        component: TipoPublicidad,
+      },
+      {
         path: "/roles",
         name: "Roles",
         component: Roles,
@@ -84,13 +89,13 @@ const routes = [
         component: Solicitud,
       },
       {
-        path: estacionamiento + '/generar-qr',
-        component: GenerarQR
+        path: estacionamiento + "/generar-qr",
+        component: GenerarQR,
       },
       {
-        path: estacionamiento + '/busqueda',
-        component: BusquedaCalle
-      }
+        path: estacionamiento + "/busqueda",
+        component: BusquedaCalle,
+      },
     ],
   },
   {

@@ -37,14 +37,19 @@
               <v-col cols="12" class="pl-5">
                 <span class="dragBox">
                   Click aqui para seleccionar archivos
-                  <input type="file" multiple accept="image/png, image/jpeg" @change="onChangeFile" />
+                  <input
+                    type="file"
+                    multiple
+                    accept="image/png, image/jpeg"
+                    @change="onChangeFile"
+                  />
                 </span>
                 <v-divider class="my-4"></v-divider>
                 <div class="cards-img-container">
                   <v-card
                     v-for="(item, i) in arrayFile"
                     :key="i"
-                    :prepend-avatar="`data:image/png;base64,${item.content}`"
+                    :prepend-avatar="`${item.content}`"
                     :subtitle="`Image ${i + 1}`"
                     class="card-img mt-2"
                     variant="outlined"
@@ -89,7 +94,7 @@ const props = defineProps({
     required: true,
   },
 });
-const emits = defineEmits(["solicitudHistoricoChange"])
+const emits = defineEmits(["solicitudHistoricoChange"]);
 
 const appStore = storeApp();
 const rules = new Rules();
@@ -106,17 +111,18 @@ const idEstatusAux = ref();
 
 onMounted(() => {
   getAllEstatus();
- // getSolicitudHistorico();
-})
+  // getSolicitudHistorico();
+});
 
-async function getAllEstatus(){
-  estatusService.findAllByEstatus()
+async function getAllEstatus() {
+  estatusService
+    .findAllByEstatus()
     .then((response) => {
       itemsEstatus.value = response.data;
     })
     .catch((e) => {
       console.log("Fatal " + e);
-    })
+    });
 }
 
 /* async function getSolicitudHistorico(){
@@ -140,23 +146,30 @@ async function getAllEstatus(){
 async function save() {
   const { valid } = await solicitudesHistoricoForm.value.validate();
   if (valid) {
-
-    if(appStore.usuario){
-      solicitudHistorico.value.idEstatus = { id: idEstatusAux.value } as Estatus;
-      solicitudHistorico.value.idUsuario = { id: appStore.usuario.id } as Usuario;
+    if (appStore.usuario) {
+      solicitudHistorico.value.idEstatus = {
+        id: idEstatusAux.value,
+      } as Estatus;
+      solicitudHistorico.value.idUsuario = {
+        id: appStore.usuario.id,
+      } as Usuario;
       solicitudHistorico.value.idSolicitud = { id: props.idSolicitud };
+
+      solicitudHistorico.value.fotosHistoricoList = arrayFile.value;
 
       // tieneHistorico.value
       // ? solicitudesHistoricoService.update(solicitudHistorico.value)
-      const saveOrUpdate = solicitudesHistoricoService.save(solicitudHistorico.value);
+      const saveOrUpdate = solicitudesHistoricoService.save(
+        solicitudHistorico.value
+      );
 
       saveOrUpdate
-      .then(() => {
-        emits("solicitudHistoricoChange");
-      })
-      .catch((e) => {
-        console.log("Fatal " + e);
-      });
+        .then(() => {
+          emits("solicitudHistoricoChange");
+        })
+        .catch((e) => {
+          console.log("Fatal " + e);
+        });
     }
   }
 }
@@ -188,9 +201,9 @@ function quitarImagen(item: any) {
   }
 }
 
-function estatusChange(){
+function estatusChange() {
   estatusDialog.value = false;
-  getAllEstatus()
+  getAllEstatus();
 }
 
 function open() {
