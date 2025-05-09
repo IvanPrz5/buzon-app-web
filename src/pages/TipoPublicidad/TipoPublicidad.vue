@@ -22,7 +22,7 @@
         </v-card>
       </v-col>
     </v-row>
-    <v-dialog v-model="tipoPublicidadFormDialog" width="400">
+    <v-dialog v-model="tipoPublicidadFormDialog" width="350">
       <TipoPublicidadForm
         :idTipoPublicidad="idTipoPublicidad"
         @tipoPublicidadChange="tipoPublicidadChange"

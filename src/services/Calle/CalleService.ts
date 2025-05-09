@@ -6,7 +6,7 @@ export class CalleService extends Crud {
     super("Calle");
   }
 
-  async generateCodigo(id: number) {
+  async generateCodigo(id: number, calle: string) {
     return await axios
       .get(this.API_URL + "/generateCodigo/" + id, {
         responseType: "blob",
@@ -15,7 +15,7 @@ export class CalleService extends Crud {
         const url = window.URL.createObjectURL(new Blob([response.data]));
         const link = document.createElement("a");
         link.href = url;
-        link.setAttribute("download", "codigo.png");
+        link.setAttribute("download", calle + "-qr.png");
         document.body.appendChild(link);
         link.click();
       })

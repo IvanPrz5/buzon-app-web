@@ -4,8 +4,8 @@ export class Crud {
   API_URL: string;
 
   constructor(nameComponent: string) {
-    //this.API_URL = 'https://api-atencion.sofim.com.mx/buzon-app-0.0.1-SNAPSHOT/api/v1/' + nameComponent;
-    this.API_URL = 'http://172.16.50.162:8095/api/v1/' + nameComponent;
+    this.API_URL = 'https://api-atencion.sofim.com.mx/buzon-app-0.0.1-SNAPSHOT/api/v1/' + nameComponent;
+    //this.API_URL = 'http://172.16.50.162:8095/api/v1/' + nameComponent;
   }
 
   async findAllByEstatus() {

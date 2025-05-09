@@ -26,6 +26,12 @@
               required
             ></v-file-input>
           </v-col>
+          <v-col cols="12">
+            <v-color-picker
+              v-model="tipoPublicidad.color"
+              hide-inputs
+            ></v-color-picker>
+          </v-col>
           <v-divider></v-divider>
           <v-col cols="12" class="mt-5 d-flex justify-end">
             <v-btn color="success" @click="saveTipoPublicidad()">Guardar</v-btn>

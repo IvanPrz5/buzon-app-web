@@ -1,5 +1,5 @@
 <template>
-  <v-container v-if="desserts.length > 0" fluid width="90vw">
+  <v-container v-if="!showLoader" fluid width="90vw">
     <div class="d-flex mb-4">
       <h2>Publicidad</h2>
       <v-spacer></v-spacer>
@@ -27,30 +27,16 @@
             <v-card-title>{{ item.titulo }}</v-card-title>
             <v-card-subtitle>
               <span class="me-1">{{ item.subTitulos }}</span>
-              <v-icon
-                color="error"
-                icon="mdi-fire-circle"
-                size="small"
-              ></v-icon>
             </v-card-subtitle>
           </v-card-item>
           <v-card-text>
             <v-row align="center" class="mx-0">
-              <div>{{ item.tipoPublicidad }}</div>
-              <v-rating
-                :model-value="4.5"
-                color="amber"
-                density="compact"
-                size="small"
-                half-increments
-                readonly
-              ></v-rating>
-              <div class="text-grey ms-4">4.5 (413)</div>
+              <div>Tipo de publicidad: {{ item.tipoPublicidad }}</div>
             </v-row>
             <br />
             <div>{{ item.descripcion.substr(0, 100) + "..." }}</div>
           </v-card-text>
-          <v-divider class="mx-4 mb-1"></v-divider>
+          <v-divider></v-divider>
           <v-card-actions class="justify-end">
             <v-btn color="primary" variant="outlined" @click="edit(item)">
               Editar
@@ -94,6 +80,7 @@ const desserts: any = ref([]);
 const publicidadFormDialog = ref(false);
 const publicidadDetalleDialog = ref(false);
 const idPublicidad = ref(null);
+const showLoader = ref(false);
 
 onMounted(() => {
   findAllByStatus();
@@ -101,13 +88,16 @@ onMounted(() => {
 
 async function findAllByStatus() {
   if (appStore.usuario) {
+    showLoader.value = true;
     publicidadService
       .findAllByStatus()
       .then((response) => {
         desserts.value = response.data;
+        showLoader.value = false;
       })
       .catch((e) => {
         console.log("Fatal " + e);
+        showLoader.value = false;
       });
   }
 }

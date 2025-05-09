@@ -24,7 +24,11 @@
         ></v-list-item>
       </v-list>
       <v-divider></v-divider>
-      <v-list density="compact" nav>
+      <v-list
+        v-if="ROLE_BZN_ADMIN == true || SUPER_ADMIN == true"
+        density="compact"
+        nav
+      >
         <v-list-item
           prepend-icon="mdi-account-group"
           title="Usuarios"
@@ -73,7 +77,11 @@
           </v-list-group> -->
         <!-- {{ appStore.usuario.role }} -->
       </v-list>
-      <v-list v-if="ROLE_ESTACIONAMIENTO === true" density="compact" nav>
+      <v-list
+        v-if="ROLE_ESTACIONAMIENTO_ADMIN == true || SUPER_ADMIN == true"
+        density="compact"
+        nav
+      >
         <v-list-item
           prepend-icon="mdi-qrcode"
           title="Generar QR"
@@ -103,7 +111,9 @@ const router = useRouter();
 const theme = useTheme();
 
 const drawer = ref(true);
-const ROLE_ESTACIONAMIENTO = ref(false);
+const SUPER_ADMIN = ref(false);
+const ROLE_ESTACIONAMIENTO_ADMIN = ref(false);
+const ROLE_BZN_ADMIN = ref(false);
 
 onBeforeMount(() => {
   const token = localStorage.getItem("token");
@@ -135,8 +145,14 @@ function getRole() {
   const usuarioRol = appStore.usuario;
   if (usuarioRol?.role) {
     for (let i = 0; i < usuarioRol.role.length; i++) {
-      if (usuarioRol.role[i].descripcion === "ROLE_ESTACIONAMIENTO") {
-        ROLE_ESTACIONAMIENTO.value = true;
+      if (usuarioRol.role[i].descripcion === "SUPER_ADMIN") {
+        SUPER_ADMIN.value = true;
+      }
+      if (usuarioRol.role[i].descripcion === "ROLE_ESTACIONAMIENTO_ADMIN") {
+        ROLE_ESTACIONAMIENTO_ADMIN.value = true;
+      }
+      if (usuarioRol.role[i].descripcion === "ROLE_BZN_ADMIN") {
+        ROLE_BZN_ADMIN.value = true;
       }
     }
   }

@@ -100,6 +100,7 @@ async function save() {
     saveOrUpdate
       .then(() => {
         dialogFormCalle.value = false;
+        getAllCalles();
       })
       .catch((e) => {
         console.log("Fatal " + e);
@@ -108,7 +109,7 @@ async function save() {
 }
 
 function generaQR(item: any) {
-  calleService.generateCodigo(item.id).catch((e) => {
+  calleService.generateCodigo(item.id, item.calle).catch((e) => {
     console.log("Fatal " + e);
   });
 }

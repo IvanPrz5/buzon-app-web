@@ -14,6 +14,6 @@ export class PublicidadService extends Crud {
   }
 
   async findAllByStatus(){
-    return await axios.get(this.API_URL + "/findAllByStatus");
+    return await axios.get(this.API_URL + "/findAllByFechasAndStatus");
   }
 }
